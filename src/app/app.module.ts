@@ -7,6 +7,8 @@ import { PatientsComponent } from './patients/patients.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { VisitsComponent } from './visits/visits.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     NavMenuComponent,
     PatientsComponent,
     DoctorsComponent,
-    VisitsComponent
+    VisitsComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
