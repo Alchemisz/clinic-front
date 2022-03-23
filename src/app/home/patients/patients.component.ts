@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Patient } from './patient.model';
+import { PatientsService } from './patients.service';
 
 @Component({
   selector: 'app-patients',
@@ -8,8 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class PatientsComponent implements OnInit {
 
   constructor() { }
+  
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
 
 }

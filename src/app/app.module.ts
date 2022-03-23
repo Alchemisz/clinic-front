@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import {HttpClientModule} from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './home/nav-menu/nav-menu.component';
 import { PatientsComponent } from './home/patients/patients.component';
@@ -9,6 +10,9 @@ import { VisitsComponent } from './home/visits/visits.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PatientsListComponent } from './home/patients/patients-list/patients-list.component';
+import { PatientItemComponent } from './home/patients/patients-list/patient-item/patient-item.component';
+import { PatientsNavMenuComponent } from './home/patients/patients-nav-menu/patients-nav-menu.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +22,15 @@ import { LoginComponent } from './login/login.component';
     DoctorsComponent,
     VisitsComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    PatientsListComponent,
+    PatientItemComponent,
+    PatientsNavMenuComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

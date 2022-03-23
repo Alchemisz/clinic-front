@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <!-- SEARCH INPUT -->
+    <div class="col-md-12 mt-4 mb-4">
+      <div class="form-group">
+        <label class="mb-2 h5">Wprowadź dane pacjenta:</label>
+        <div class="input-group mb-1">
+          <input type="text" class="form-control" placeholder="Wyszukaj">
+          <button class="btn btn-outline-secondary">
+            Szukaj
+          </button>
+        </div>
+        <small class="form-text text-muted">Wyszukaj po danych osobowych lub numerze pesel</small>
+      </div>
+    </div>
+
+    <!-- PATIENTS LIST -->
+    <app-patient-item *ngFor="let patientEl of patients" [patient]="patientEl"></app-patient-item>
+
+    <!-- PAGINATION -->
+    <div class="mt-5">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
