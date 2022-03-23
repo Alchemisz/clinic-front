@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
-import { PatientsComponent } from '../patients/patients.component';
-import { DoctorsComponent } from '../doctors/doctors.component';
-import { VisitsComponent } from '../visits/visits.component';
+import { PatientsComponent } from '../home/patients/patients.component';
+import { DoctorsComponent } from '../home/doctors/doctors.component';
+import { VisitsComponent } from '../home/visits/visits.component';
 import { HomeComponent } from '../home/home.component';
 import { LoginComponent } from '../login/login.component';
 
