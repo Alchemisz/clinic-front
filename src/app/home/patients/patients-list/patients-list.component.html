@@ -27,8 +27,8 @@
               <span class="sr-only">Previous</span>
             </a>
           </li>
-          <li class="page-item" *ngFor="num of numbers; let i = index"><a class="page-link"
-              (click)="fetchPatientsByPage(i)">{{i + 1}}</a>
+          <li class="page-item" *ngFor="num of numbers; let i = index" [ngClass]="{'active' : currentPage == i}"><a
+              class="page-link" (click)="fetchPatientsByPage(i)">{{i + 1}}</a>
           </li>
           <li class="page-item" [ngClass]="{'disabled' : currentPage == (totalPages-1)}">
             <a class="page-link" (click)="fetchPatientsByPage(currentPage + 1)">

@@ -12,7 +12,8 @@ export class PatientsListComponent implements OnInit {
 
   patients: Patient[] = [];
   patientsSub: Subscription = new Subscription;
-  pageSub: Subscription = new Subscription;
+  patientChangedSub: Subscription = new Subscription;
+  totalPagesSub: Subscription = new Subscription;
   currentPage: number;
   totalPages: number;
   numbers: number[];
@@ -24,18 +25,18 @@ export class PatientsListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.pageSub = this.patientSerivce.getTotalPages()
-      .subscribe((totalPages: number) => {
-        this.totalPages = totalPages;
-        this.numbers = Array(this.totalPages);
-      })
+    this.fetchPatientsByPagination(this.currentPage);
 
-    this.patientsSub = this.patientSerivce.getPatientsByPage(this.currentPage)
-      .subscribe(
-        (patients: Patient[]) => {
-          this.patients = patients;
-        }
-      );
+    this.patientChangedSub = this.patientSerivce.patientsChanged
+      .subscribe(flag => {
+          this.fetchPatientsByPagination(this.currentPage);
+      })
+    
+    this.totalPagesSub = this.patientSerivce.totalPages
+      .subscribe(data => {
+        this.totalPages = +data;
+        this.numbers = Array(this.totalPages);
+      });
 
   }
 
@@ -43,20 +44,22 @@ export class PatientsListComponent implements OnInit {
     this.currentPage = pageIndex;
     this.patientsSub.unsubscribe();
 
-    console.log(this.currentPage + ':' + this.totalPages);
-    
+    this.fetchPatientsByPagination(pageIndex);
+  }
 
+  private fetchPatientsByPagination(pageIndex: number) : void{
     this.patientsSub = this.patientSerivce.getPatientsByPage(this.currentPage)
       .subscribe(
         (patients: Patient[]) => {
           this.patients = patients;
         }
-      );
+    );
   }
 
   ngOnDestroy(): void {
     this.patientsSub.unsubscribe();
-    this.pageSub.unsubscribe();
+    this.totalPagesSub.unsubscribe();
+    this.patientChangedSub.unsubscribe();
   }
   
 

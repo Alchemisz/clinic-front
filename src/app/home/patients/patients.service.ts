@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { map, Observable, Subject } from 'rxjs';
 import { Patient } from './patient.model';
 
 @Injectable({
@@ -8,7 +9,11 @@ import { Patient } from './patient.model';
 })
 export class PatientsService {
 
-  constructor(private http: HttpClient
+  patientsChanged = new Subject<Boolean>();
+  totalPages = new Subject<Number>();
+
+  constructor(
+    private http: HttpClient
   ) {}
 
 
@@ -32,9 +37,19 @@ export class PatientsService {
       .get<any>('http://localhost:8080/patient/pageable?page=' + pageIndex)
       .pipe(
         map(data => {
+          this.totalPages.next(data.totalPages);
           return data.content;
         })
       );
+  }
+
+  public deleteByPesel(pesel: string){
+    this.http
+      .delete('http://localhost:8080/patient/' + pesel)
+        .subscribe(response => {
+          console.log(response)
+          this.patientsChanged.next(true);
+        });
   }
 
 }

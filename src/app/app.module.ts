@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { PatientsListComponent } from './home/patients/patients-list/patients-list.component';
 import { PatientItemComponent } from './home/patients/patients-list/patient-item/patient-item.component';
 import { PatientsNavMenuComponent } from './home/patients/patients-nav-menu/patients-nav-menu.component';
+import { PatientAddFormComponent } from './home/patients/patient-add-form/patient-add-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PatientsNavMenuComponent } from './home/patients/patients-nav-menu/pati
     LoginComponent,
     PatientsListComponent,
     PatientItemComponent,
-    PatientsNavMenuComponent
+    PatientsNavMenuComponent,
+    PatientAddFormComponent
   ],
   imports: [
     BrowserModule,
