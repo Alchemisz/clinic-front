@@ -5,12 +5,13 @@
       <div class="form-group">
         <label class="mb-2 h5">Wprowadź dane pacjenta:</label>
         <div class="input-group mb-1">
-          <input type="text" class="form-control" placeholder="Wyszukaj">
-          <button class="btn btn-outline-secondary">
+          <input type="number" class="form-control" placeholder="Wyszukaj" #searchPhrase>
+          <button class="btn btn-outline-secondary"
+            (click)="fetchPatientsByPage(0, searchPhrase.value); isSearchModeActive=true;">
             Szukaj
           </button>
         </div>
-        <small class="form-text text-muted">Wyszukaj po danych osobowych lub numerze pesel</small>
+        <small class="form-text text-muted">Wyszukaj pacjenta po numerze pesel</small>
       </div>
     </div>
 

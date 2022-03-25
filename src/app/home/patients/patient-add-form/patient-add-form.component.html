@@ -1,1 +1,91 @@
-<p>patient-add-form works!</p>
+<div class="row justify-content-center">
+  <form class="row" #formRef="ngForm" (ngSubmit)="onFormSubmit(formRef)">
+    <!-- DANE PODSTAWOWE -->
+    <div class="col-xl-6 mt-4">
+
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title">Wprowadź dane podstawowe</h5>
+          <!--DATA URODZENIA  -->
+          <div class="form-group mt-3">
+            <label>Data urodzenia:</label>
+            <input type="date" class="form-control" name="dateOfBirth" ngModel required #dateOfBirth="ngModel">
+            <small class="form-text text-muted">Data urodzenia jest wymagana do wygenerowania numeru pesel</small><br>
+            <small class="help-message" *ngIf="!dateOfBirth.valid && dateOfBirth.touched">To pole jest wymagane do
+              wygenerowania numeru pesel</small>
+          </div>
+          <!-- PESEL -->
+          <div class="form-group mt-3">
+            <label>Pesel:</label>
+
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Pesel" name="pesel" ngModel #pesel="ngModel" required
+                readonly>
+              <button type="button" class="btn btn-outline-secondary" [disabled]="!dateOfBirth.valid"
+                (click)="generatePesel()">
+                Generuj
+              </button>
+            </div>
+            <small class="form-text text-muted">Pesel jest generowany przez system</small><br>
+            <small class="help-message" *ngIf="!dateOfBirth.valid && dateOfBirth.touched">Aby wygenerować numer pesel
+              wprowadź datę urodzenia</small>
+          </div>
+
+          <div class="form-group mt-3">
+            <label>Imię:</label>
+            <input type="text" class="form-control" placeholder="Wprowadź imię" name="firstName" ngModel required
+              pattern="[a-z]*" #firstName="ngModel">
+            <small class="help-message" *ngIf="!firstName.valid && firstName.touched">To pole jest wymagane</small>
+          </div>
+
+          <div class="form-group mt-3 mb-2">
+            <label>Nazwisko:</label>
+            <input type="text" class="form-control" placeholder="Wprowadź nazwisko" name="lastName" ngModel required
+              pattern="[a-z]*" #lastName="ngModel">
+            <small class="help-message" *ngIf="!lastName.valid && lastName.touched">To pole jest wymagane</small>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ADRES -->
+    <div class="col-xl-6 mt-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title">Wprowadź adres zamieszkania</h5>
+
+          <div class="form-group mt-3">
+            <label>Kod pocztowy:</label>
+            <input type="text" class="form-control" placeholder="Wprowadź kod pocztowy" name="postCode" ngModel required
+              pattern="\d{2}-\d{3}" #postCode="ngModel">
+            <small class="help-message" *ngIf="!postCode.valid && postCode.touched">Kod pocztowy powinien spełniać
+              format
+              "XX-XXX"</small>
+          </div>
+
+          <div class=" form-group mt-3">
+            <label>Miejscowość:</label>
+            <input type="text" class="form-control" placeholder="Wprowadź miejscowość" name="city" ngModel required
+              #city="ngModel">
+            <small class="help-message" *ngIf="!city.valid && city.touched">To pole jest wymagane</small>
+          </div>
+
+          <div class="form-group mt-3">
+            <label>Numer domu:</label>
+            <input type="text" class="form-control" placeholder="Wprowadź numer domu" name="homeNumber" ngModel required
+              #homeNumber="ngModel">
+            <small class="help-message" *ngIf="!homeNumber.valid && homeNumber.touched">To pole jest wymagane</small>
+          </div>
+
+          <div class="form-group mt-4 mb-2">
+            <button class="btn btn-success" type="submit" [disabled]="!formRef.valid">
+              Dodaj pacjenta
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

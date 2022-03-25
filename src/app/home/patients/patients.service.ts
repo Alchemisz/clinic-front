@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { STRING_TYPE } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable, Subject } from 'rxjs';
@@ -32,9 +33,16 @@ export class PatientsService {
       );
   }
 
-  public getPatientsByPage(pageIndex: number){
+  public getPatientsByPage(pageIndex: number, searchPattern?: string){
+
+    let requestUrl: string = 'http://localhost:8080/patient/pageable?page=' + pageIndex;
+
+    if(typeof searchPattern !== 'undefined'){
+      requestUrl = 'http://localhost:8080/patient/pageable?page=' + pageIndex + '&value='+searchPattern;
+    }
+
     return this.http
-      .get<any>('http://localhost:8080/patient/pageable?page=' + pageIndex)
+      .get<any>(requestUrl)
       .pipe(
         map(data => {
           this.totalPages.next(data.totalPages);

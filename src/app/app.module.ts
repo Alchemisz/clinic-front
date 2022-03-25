@@ -14,6 +14,7 @@ import { PatientsListComponent } from './home/patients/patients-list/patients-li
 import { PatientItemComponent } from './home/patients/patients-list/patient-item/patient-item.component';
 import { PatientsNavMenuComponent } from './home/patients/patients-nav-menu/patients-nav-menu.component';
 import { PatientAddFormComponent } from './home/patients/patient-add-form/patient-add-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PatientAddFormComponent } from './home/patients/patient-add-form/patien
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

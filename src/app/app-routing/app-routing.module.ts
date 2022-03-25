@@ -11,6 +11,7 @@ import { PatientAddFormComponent } from '../home/patients/patient-add-form/patie
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, children: [
     {path: 'pacjeci', component: PatientsComponent, children: [
+      {path: '', component: PatientsListComponent},
       {path: 'lista', component: PatientsListComponent},
       {path: 'dodaj', component: PatientAddFormComponent}
     ]},
