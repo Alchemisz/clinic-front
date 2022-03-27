@@ -60,4 +60,14 @@ export class PatientsService {
         });
   }
 
+  public generatePassword(): string{
+    console.log("No implementation GENERATE_PASSWORD (patient_service)");
+    return "";
+  }
+
+  public generatePesel(): string{
+    console.log("No implementation GENERATE_PESEL (patient_service)");
+    return "";
+  }
+
 }

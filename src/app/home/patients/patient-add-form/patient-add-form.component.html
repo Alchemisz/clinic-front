@@ -1,5 +1,6 @@
 <div class="row justify-content-center">
   <form class="row" #formRef="ngForm" (ngSubmit)="onFormSubmit(formRef)">
+
     <!-- DANE PODSTAWOWE -->
     <div class="col-xl-6 mt-4">
 
@@ -49,9 +50,40 @@
       </div>
     </div>
 
-    <!-- ADRES -->
-    <div class="col-xl-6 mt-4">
+    <div class="col-xl-6 mt-4 mb-4">
+
+      <!-- DANE KONTA W SYSTEMIE -->
       <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title">Wprowadź informacje o koncie</h5>
+
+          <div class=" form-group mt-3">
+            <label>Nazwa użytkownika:</label>
+            <input type="text" class="form-control" placeholder="Nazwa użytkownika" name="city" ngModel required
+              #city="ngModel">
+            <small class="help-message" *ngIf="!city.valid && city.touched">To pole jest wymagane</small>
+          </div>
+
+          <div class="form-group mt-3">
+            <label>Hasło użytkownika:</label>
+
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Hasło" name="password" ngModel #password="ngModel"
+                required readonly>
+              <button type="button" class="btn btn-outline-secondary" (click)="generatePassword()">
+                Generuj
+              </button>
+            </div>
+            <small class="form-text text-muted">Hasło użytkownika jest generowane przez system</small><br>
+            <small class="help-message" *ngIf="!password.valid && password.touched">Wygeneruj hasło dla
+              użytkownika</small>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ADRES -->
+      <div class="card shadow mt-4">
         <div class="card-body">
           <h5 class="card-title">Wprowadź adres zamieszkania</h5>
 
@@ -86,6 +118,7 @@
 
         </div>
       </div>
+
     </div>
   </form>
 </div>

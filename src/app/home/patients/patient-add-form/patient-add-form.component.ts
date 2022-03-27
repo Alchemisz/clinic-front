@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { PatientsService } from '../patients.service';
 
 @Component({
   selector: 'app-patient-add-form',
@@ -11,7 +12,7 @@ export class PatientAddFormComponent implements OnInit {
   @ViewChild('formRef')
   patientForm!: NgForm;
 
-  constructor() { }
+  constructor(private patientService: PatientsService) { }
 
   ngOnInit(): void {
   }
@@ -23,8 +24,16 @@ export class PatientAddFormComponent implements OnInit {
 
   generatePesel(): void{
     this.patientForm.form.patchValue({
+      // pesel: this.patientService.generatePesel()
       pesel: '99112233654',
-    })
+    }) 
+  }
+
+  generatePassword(): void{
+    this.patientForm.form.patchValue({
+      // password: this.patientService.generatePassword()
+      password: 'X98af5TZY',
+    }) 
   }
 
 }
