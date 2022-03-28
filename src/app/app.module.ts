@@ -15,6 +15,14 @@ import { PatientItemComponent } from './home/patients/patients-list/patient-item
 import { PatientsNavMenuComponent } from './home/patients/patients-nav-menu/patients-nav-menu.component';
 import { PatientAddFormComponent } from './home/patients/patient-add-form/patient-add-form.component';
 import { FormsModule } from '@angular/forms';
+import { DoctorNavMenuComponent } from './home/doctors/doctor-nav-menu/doctor-nav-menu.component';
+import { DoctorsListComponent } from './home/doctors/doctors-list/doctors-list.component';
+import { DoctorAddFormComponent } from './home/doctors/doctor-add-form/doctor-add-form.component';
+import { IncomingVisitsListComponent } from './home/visits/incoming-visits-list/incoming-visits-list.component';
+import { EndedVisitsListComponent } from './home/visits/ended-visits-list/ended-visits-list.component';
+import { AddVisitFormComponent } from './home/visits/add-visit-form/add-visit-form.component';
+import { VisitNavMenuComponent } from './home/visits/visit-nav-menu/visit-nav-menu.component';
+import { SpinnerLoaderComponent } from './shared/spinner-loader/spinner-loader.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +36,15 @@ import { FormsModule } from '@angular/forms';
     PatientsListComponent,
     PatientItemComponent,
     PatientsNavMenuComponent,
-    PatientAddFormComponent
+    PatientAddFormComponent,
+    DoctorNavMenuComponent,
+    DoctorsListComponent,
+    DoctorAddFormComponent,
+    IncomingVisitsListComponent,
+    EndedVisitsListComponent,
+    AddVisitFormComponent,
+    VisitNavMenuComponent,
+    SpinnerLoaderComponent,
   ],
   imports: [
     BrowserModule,

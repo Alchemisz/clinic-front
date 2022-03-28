@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    this.router.navigate(['./pacjeci']);
+    this.router.navigate(['/']);
   }
 
 }

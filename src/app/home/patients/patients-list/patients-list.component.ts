@@ -21,11 +21,14 @@ export class PatientsListComponent implements OnInit {
   totalPages: number;
   numbers: number[];
 
+  isLoadingData: boolean;
+
   constructor(private patientSerivce: PatientsService) {
     this.currentPage = 0;
     this.totalPages = 0;
     this.numbers = [];
     this.isSearchModeActive = false;
+    this.isLoadingData = true;
   }
   
   ngOnInit(): void {
@@ -40,6 +43,8 @@ export class PatientsListComponent implements OnInit {
       .subscribe(data => {
         this.totalPages = +data;
         this.numbers = Array(this.totalPages);
+        
+        this.isLoadingData = false;
       });
 
   }

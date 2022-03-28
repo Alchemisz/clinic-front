@@ -1,14 +1,19 @@
-<ul class="nav nav-tabs h5">
+<ul class="nav nav-tabs h5 justify-content-between">
+  <div class="nav">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" routerLinkActive="active" routerLink="/pacjenci">Pacjenci</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active" routerLink="/wizyty">Wizyty</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active" routerLink="/lekarze">Lekarze</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Konto</a>
+    </li>
+  </div>
   <li class="nav-item">
-    <a class="nav-link" aria-current="page" routerLinkActive="active" routerLink="/pacjeci/">Pacjenci</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" routerLinkActive="active" routerLink="/wizyty">Wizyty</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" routerLinkActive="active" routerLink="/lekarze">Lekarze</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Konto</a>
+    <button class="nav-link text-danger" (click)="logout()">Wyloguj</button>
   </li>
 </ul>

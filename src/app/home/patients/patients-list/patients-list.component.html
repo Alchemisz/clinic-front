@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-md-10">
+  <div *ngIf="!isLoadingData" class="col-md-10">
     <!-- SEARCH INPUT -->
     <div class="col-md-12 mt-4 mb-4">
       <div class="form-group">
@@ -40,5 +40,10 @@
         </ul>
       </nav>
     </div>
+  </div>
+
+  <div class="col-md-10 mt-5 text-center">
+    <app-spinner-loader *ngIf=" isLoadingData">
+    </app-spinner-loader>
   </div>
 </div>
