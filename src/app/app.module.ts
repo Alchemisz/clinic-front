@@ -23,6 +23,7 @@ import { EndedVisitsListComponent } from './home/visits/ended-visits-list/ended-
 import { AddVisitFormComponent } from './home/visits/add-visit-form/add-visit-form.component';
 import { VisitNavMenuComponent } from './home/visits/visit-nav-menu/visit-nav-menu.component';
 import { SpinnerLoaderComponent } from './shared/spinner-loader/spinner-loader.component';
+import { DoctorItemComponent } from './home/doctors/doctors-list/doctor-item/doctor-item.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { SpinnerLoaderComponent } from './shared/spinner-loader/spinner-loader.c
     AddVisitFormComponent,
     VisitNavMenuComponent,
     SpinnerLoaderComponent,
+    DoctorItemComponent,
   ],
   imports: [
     BrowserModule,

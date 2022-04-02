@@ -1,0 +1,14 @@
+<div class="row mt-2 shadow mb-1 rounded list-item">
+  <div class="col-md-5 p-2 border">
+    {{doctor.firstName + ' ' + doctor.lastName}}
+  </div>
+  <div class="col-md-3 p-2 border-top border-bottom">
+    <span *ngFor="let specialization of doctor.specializations; let i = index">
+      {{specialization.name + ((doctor.specializations.length == (i + 1)) ? ' ' : ', ')}}
+    </span>
+  </div>
+  <div class="col-md-4 text-center border">
+    <button class="btn-sm btn-secondary m-1">Szczegóły</button>
+    <button class="btn-sm btn-danger m-1">Usuń</button>
+  </div>
+</div>

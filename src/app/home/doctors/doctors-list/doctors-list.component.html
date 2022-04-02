@@ -1,1 +1,35 @@
-<p>doctors-list works!</p>
+<div class="row justify-content-center">
+  <div *ngIf="!isLoadingData" class="col-md-10 mt-4">
+
+    <!-- PATIENTS LIST -->
+    <app-doctor-item *ngFor="let doctorEl of doctors" [doctor]="doctorEl"></app-doctor-item>
+
+    <!-- PAGINATION -->
+    <div *ngIf="totalPages > 1" class="mt-5">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [ngClass]="{'disabled' : currentPage == 0}">
+            <a class="page-link" (click)="fetchDoctorsByPage(currentPage - 1)">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="num of numbers; let i = index" [ngClass]="{'active' : currentPage == i}"><a
+              class="page-link" (click)="fetchDoctorsByPage(i)">{{i + 1}}</a>
+          </li>
+          <li class="page-item" [ngClass]="{'disabled' : currentPage == (totalPages-1)}">
+            <a class="page-link" (click)="fetchDoctorsByPage(currentPage + 1)">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="col-md-10 mt-5 text-center">
+    <app-spinner-loader *ngIf=" isLoadingData">
+    </app-spinner-loader>
+  </div>
+</div>
