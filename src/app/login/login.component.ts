@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthResponseData, AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +10,24 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(){
-    this.router.navigate(['/']);
+  onLogin(){
+    
+    let authObs: Observable<AuthResponseData>;
+
+    authObs = this.authService.login("user", "password");
+
+    authObs.subscribe(
+      response => {
+        console.log(response);
+        this.router.navigate(['/pacjenci']);
+      }
+    );
+
   }
 
 }

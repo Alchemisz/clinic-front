@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './home/nav-menu/nav-menu.component';
 import { PatientsComponent } from './home/patients/patients.component';
@@ -24,6 +24,8 @@ import { AddVisitFormComponent } from './home/visits/add-visit-form/add-visit-fo
 import { VisitNavMenuComponent } from './home/visits/visit-nav-menu/visit-nav-menu.component';
 import { SpinnerLoaderComponent } from './shared/spinner-loader/spinner-loader.component';
 import { DoctorItemComponent } from './home/doctors/doctors-list/doctor-item/doctor-item.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { AccountInfoFormComponent } from './home/account/account-info-form/account-info-form.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { DoctorItemComponent } from './home/doctors/doctors-list/doctor-item/doc
     VisitNavMenuComponent,
     SpinnerLoaderComponent,
     DoctorItemComponent,
+    AccountInfoFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,7 @@ import { DoctorItemComponent } from './home/doctors/doctors-list/doctor-item/doc
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

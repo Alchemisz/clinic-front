@@ -12,6 +12,8 @@ import { DoctorAddFormComponent } from '../home/doctors/doctor-add-form/doctor-a
 import { IncomingVisitsListComponent } from '../home/visits/incoming-visits-list/incoming-visits-list.component';
 import { EndedVisitsListComponent } from '../home/visits/ended-visits-list/ended-visits-list.component';
 import { AddVisitFormComponent } from '../home/visits/add-visit-form/add-visit-form.component';
+import { AuthGuard } from '../auth/auth.guard';
+import { AccountInfoFormComponent } from '../home/account/account-info-form/account-info-form.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, children: [
@@ -30,8 +32,9 @@ const appRoutes: Routes = [
       {path: 'nadchodzace', component: IncomingVisitsListComponent},
       {path: 'zakonczone', component: EndedVisitsListComponent},
       {path: 'dodaj', component: AddVisitFormComponent}
-    ]}
-  ]},
+    ]},
+    {path: 'konto', component: AccountInfoFormComponent},
+  ], canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
 
