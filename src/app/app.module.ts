@@ -18,7 +18,6 @@ import { FormsModule } from '@angular/forms';
 import { DoctorNavMenuComponent } from './home/doctors/doctor-nav-menu/doctor-nav-menu.component';
 import { DoctorsListComponent } from './home/doctors/doctors-list/doctors-list.component';
 import { DoctorAddFormComponent } from './home/doctors/doctor-add-form/doctor-add-form.component';
-import { IncomingVisitsListComponent } from './home/visits/incoming-visits-list/incoming-visits-list.component';
 import { EndedVisitsListComponent } from './home/visits/ended-visits-list/ended-visits-list.component';
 import { AddVisitFormComponent } from './home/visits/add-visit-form/add-visit-form.component';
 import { VisitNavMenuComponent } from './home/visits/visit-nav-menu/visit-nav-menu.component';
@@ -26,6 +25,10 @@ import { SpinnerLoaderComponent } from './shared/spinner-loader/spinner-loader.c
 import { DoctorItemComponent } from './home/doctors/doctors-list/doctor-item/doctor-item.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AccountInfoFormComponent } from './home/account/account-info-form/account-info-form.component';
+import { AccountComponent } from './home/account/account.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { UpcomingVisitsListComponent } from './home/visits/upcoming-visits-list/upcoming-visits-list.component';
 
 @NgModule({
   declarations: [
@@ -43,21 +46,24 @@ import { AccountInfoFormComponent } from './home/account/account-info-form/accou
     DoctorNavMenuComponent,
     DoctorsListComponent,
     DoctorAddFormComponent,
-    IncomingVisitsListComponent,
     EndedVisitsListComponent,
     AddVisitFormComponent,
     VisitNavMenuComponent,
     SpinnerLoaderComponent,
     DoctorItemComponent,
     AccountInfoFormComponent,
+    AccountComponent,
+    UpcomingVisitsListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [MatSnackBar, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

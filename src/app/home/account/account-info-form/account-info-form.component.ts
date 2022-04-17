@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/auth/user.model';
@@ -8,12 +8,19 @@ import { User } from 'src/app/auth/user.model';
   templateUrl: './account-info-form.component.html',
   styleUrls: ['./account-info-form.component.css']
 })
-export class AccountInfoFormComponent implements OnInit, OnDestroy {
+export class AccountInfoFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  user!: User;
+  user!: User | null;
   userSub!: Subscription;
 
+  @ViewChild('username')
+  usernameField!: ElementRef;
+
   constructor(private authService: AuthService) {}
+
+  ngAfterViewInit(): void {
+    this.usernameField.nativeElement.value = this.user!.login;
+  }
 
   ngOnDestroy(): void {
     this.userSub.unsubscribe();
@@ -21,7 +28,7 @@ export class AccountInfoFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe(user => {
-      console.log(user);
+      this.user = user;
     });
   }
 

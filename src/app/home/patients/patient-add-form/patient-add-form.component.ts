@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PatientsService } from '../patients.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-patient-add-form',
@@ -12,13 +13,26 @@ export class PatientAddFormComponent implements OnInit {
   @ViewChild('formRef')
   patientForm!: NgForm;
 
-  constructor(private patientService: PatientsService) { }
+  constructor(
+    private patientService: PatientsService,
+    private _snackBar:MatSnackBar
+    ) { }
 
   ngOnInit(): void {
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      horizontalPosition: "center",
+      verticalPosition: "top",
+      duration: 2000
+    });
+  }
+
+
   onFormSubmit(formRef: NgForm){
     this.patientForm.form.removeControl('dateOfBirth');
+    this.openSnackBar("Dodano pacjenta!", "Zamknij");
     console.log(formRef.value);
   }
 

@@ -7,7 +7,10 @@ export class Doctor{
         public lastName: string,
         public address: Address,
         public id: string,
-        public specializations: {name: string}[]
+        public specializations: {
+            id: number, 
+            name: string
+        }[]
     ){};
 
 }

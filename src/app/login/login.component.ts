@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthResponseData, AuthService } from '../auth/auth.service';
 
 @Component({
@@ -8,20 +9,31 @@ import { AuthResponseData, AuthService } from '../auth/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnDestroy {
+
+  authSubScription!: Subscription;
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+    this.authSubScription.unsubscribe();
   }
 
-  onLogin(){
+  onLogin(loginFormRef: NgForm){
     
     let authObs: Observable<AuthResponseData>;
+    
+    // authObs = this.authService.login(
+    //   loginFormRef.value['login'],
+    //   loginFormRef.value['password']
+    //   );
 
-    authObs = this.authService.login("user", "password");
+    authObs = this.authService.login(
+      "user",
+      "password"
+    );
 
-    authObs.subscribe(
+    this.authSubScription = authObs.subscribe(
       response => {
         console.log(response);
         this.router.navigate(['/pacjenci']);

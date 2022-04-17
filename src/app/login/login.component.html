@@ -4,12 +4,14 @@
       <!-- Tabs Titles -->
 
       <!-- Login Form -->
-      <!-- <form> -->
-      <label class="h4">Zaloguj się</label>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nazwa użytkownika">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="Hasło">
-      <input type="button" class="fadeIn fourth mt-3" value="Zaloguj" (click)="onLogin()">
-      <!-- </form> -->
+      <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+        <label class="h4">Zaloguj się</label>
+        <input type="text" id="login" class="fadeIn second" name="login" ngModel #login="ngModel"
+          placeholder="Nazwa użytkownika">
+        <input type="text" id="password" class="fadeIn third" name="password" ngModel #password="ngModel"
+          placeholder="Hasło">
+        <input type="submit" class="fadeIn fourth mt-3" value="Zaloguj">
+      </form>
 
       <!-- Remind Passowrd -->
       <div id="formFooter">

@@ -4,11 +4,11 @@ import { Visit } from '../visit-nav-menu/visit.model';
 import { VisitsService } from '../visits.service';
 
 @Component({
-  selector: 'app-ended-visits-list',
-  templateUrl: './ended-visits-list.component.html',
-  styleUrls: ['./ended-visits-list.component.css'],
+  selector: 'app-upcoming-visits-list',
+  templateUrl: './upcoming-visits-list.component.html',
+  styleUrls: ['./upcoming-visits-list.component.css'],
 })
-export class EndedVisitsListComponent implements OnInit, OnDestroy {
+export class UpcomingVisitsListComponent implements OnInit, OnDestroy {
   visitsSub!: Subscription;
   totalPageSub!: Subscription;
 
@@ -23,7 +23,7 @@ export class EndedVisitsListComponent implements OnInit, OnDestroy {
       (totalPages: number) => console.log(totalPages)
     );
 
-    this.visitsService.getEndedVisits(1);
+    this.visitsService.getUpcomingVisits(0);
   }
 
   ngOnDestroy(): void {

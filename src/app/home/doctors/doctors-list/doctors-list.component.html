@@ -19,8 +19,8 @@
           </li>
           <li class="page-item" [ngClass]="{'disabled' : currentPage == (totalPages-1)}">
             <a class="page-link" (click)="fetchDoctorsByPage(currentPage + 1)">
-              <span aria-hidden="true">&raquo;</span>
               <span class="sr-only">Next</span>
+              <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
         </ul>

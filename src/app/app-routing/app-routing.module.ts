@@ -9,43 +9,54 @@ import { PatientsListComponent } from '../home/patients/patients-list/patients-l
 import { PatientAddFormComponent } from '../home/patients/patient-add-form/patient-add-form.component';
 import { DoctorsListComponent } from '../home/doctors/doctors-list/doctors-list.component';
 import { DoctorAddFormComponent } from '../home/doctors/doctor-add-form/doctor-add-form.component';
-import { IncomingVisitsListComponent } from '../home/visits/incoming-visits-list/incoming-visits-list.component';
 import { EndedVisitsListComponent } from '../home/visits/ended-visits-list/ended-visits-list.component';
 import { AddVisitFormComponent } from '../home/visits/add-visit-form/add-visit-form.component';
 import { AuthGuard } from '../auth/auth.guard';
-import { AccountInfoFormComponent } from '../home/account/account-info-form/account-info-form.component';
+import { AccountComponent } from '../home/account/account.component';
+import { UpcomingVisitsListComponent } from '../home/visits/upcoming-visits-list/upcoming-visits-list.component';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent, children: [
-    {path: 'pacjenci', component: PatientsComponent, children: [
-      {path: '', redirectTo: 'lista', pathMatch: 'full'},
-      {path: 'lista', component: PatientsListComponent},
-      {path: 'dodaj', component: PatientAddFormComponent}
-    ]},
-    {path: 'lekarze', component: DoctorsComponent, children: [
-      {path: '', redirectTo: 'lista', pathMatch: 'full'},
-      {path: 'lista', component: DoctorsListComponent},
-      {path: 'dodaj', component: DoctorAddFormComponent}
-    ]},
-    {path: 'wizyty', component: VisitsComponent, children: [
-      {path: '', redirectTo: 'nadchodzace', pathMatch: 'full'},
-      {path: 'nadchodzace', component: IncomingVisitsListComponent},
-      {path: 'zakonczone', component: EndedVisitsListComponent},
-      {path: 'dodaj', component: AddVisitFormComponent}
-    ]},
-    {path: 'konto', component: AccountInfoFormComponent},
-  ], canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent}
+  {
+    path: '',
+    component: HomeComponent,
+    children: [
+      {
+        path: 'pacjenci',
+        component: PatientsComponent,
+        children: [
+          { path: '', redirectTo: 'lista', pathMatch: 'full' },
+          { path: 'lista', component: PatientsListComponent },
+          { path: 'dodaj', component: PatientAddFormComponent },
+        ],
+      },
+      {
+        path: 'lekarze',
+        component: DoctorsComponent,
+        children: [
+          { path: '', redirectTo: 'lista', pathMatch: 'full' },
+          { path: 'lista', component: DoctorsListComponent },
+          { path: 'dodaj', component: DoctorAddFormComponent },
+        ],
+      },
+      {
+        path: 'wizyty',
+        component: VisitsComponent,
+        children: [
+          { path: '', redirectTo: 'nadchodzace', pathMatch: 'full' },
+          { path: 'nadchodzace', component: UpcomingVisitsListComponent },
+          { path: 'archiwum', component: EndedVisitsListComponent },
+          { path: 'dodaj', component: AddVisitFormComponent },
+        ],
+      },
+      { path: 'konto', component: AccountComponent },
+    ],
+    canActivate: [AuthGuard],
+  },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(appRoutes),
-  ],
-  exports: [
-    RouterModule
-  ],
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}
