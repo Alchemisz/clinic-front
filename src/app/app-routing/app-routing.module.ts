@@ -14,6 +14,7 @@ import { AddVisitFormComponent } from '../home/visits/add-visit-form/add-visit-f
 import { AuthGuard } from '../auth/auth.guard';
 import { AccountComponent } from '../home/account/account.component';
 import { UpcomingVisitsListComponent } from '../home/visits/upcoming-visits-list/upcoming-visits-list.component';
+import { PatientDetailsComponent } from '../home/patients/patient-details/patient-details.component';
 
 const appRoutes: Routes = [
   {
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
         children: [
           { path: '', redirectTo: 'lista', pathMatch: 'full' },
           { path: 'lista', component: PatientsListComponent },
+          { path: 'szczegoly/:id', component: PatientDetailsComponent },
           { path: 'dodaj', component: PatientAddFormComponent },
         ],
       },

@@ -31,6 +31,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { UpcomingVisitsListComponent } from './home/visits/upcoming-visits-list/upcoming-visits-list.component';
 import { VisitListItemComponent } from './home/visits/visit-list-item/visit-list-item.component';
 import { DatePipe } from '@angular/common';
+import { PatientDetailsComponent } from './home/patients/patient-details/patient-details.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { DatePipe } from '@angular/common';
     AccountComponent,
     UpcomingVisitsListComponent,
     VisitListItemComponent,
+    PatientDetailsComponent,
   ],
   imports: [
     BrowserModule,

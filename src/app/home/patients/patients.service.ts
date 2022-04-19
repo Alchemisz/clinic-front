@@ -12,6 +12,7 @@ export class PatientsService {
   patientsChanged = new Subject<Boolean>();
   totalPages = new Subject<Number>();
   patients = new Subject<Patient[]>();
+  patient = new Subject<Patient>();
 
   constructor(private http: HttpClient) {}
 
@@ -49,6 +50,14 @@ export class PatientsService {
       )
       .subscribe((patients: Patient[]) => {
         this.patients.next(patients);
+      });
+  }
+
+  public getPatientByPesel(pesel: string) {
+    this.http
+      .get('http://localhost:8080/patient/' + pesel)
+      .subscribe((response) => {
+        this.patient.next(response as Patient);
       });
   }
 
