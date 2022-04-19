@@ -6,17 +6,16 @@ import { PatientsService } from '../patients.service';
 @Component({
   selector: 'app-patients-list',
   templateUrl: './patients-list.component.html',
-  styleUrls: ['./patients-list.component.css']
+  styleUrls: ['./patients-list.component.css'],
 })
 export class PatientsListComponent implements OnInit {
-
   @ViewChild('searchPhrase') searchInput!: ElementRef;
   isSearchModeActive: boolean;
 
   patients: Patient[] = [];
-  patientsSub: Subscription = new Subscription;
-  patientChangedSub: Subscription = new Subscription;
-  totalPagesSub: Subscription = new Subscription;
+  patientsSub: Subscription = new Subscription();
+  patientChangedSub: Subscription = new Subscription();
+  totalPagesSub: Subscription = new Subscription();
   currentPage: number;
   totalPages: number;
   numbers: number[];
@@ -30,43 +29,45 @@ export class PatientsListComponent implements OnInit {
     this.isSearchModeActive = false;
     this.isLoadingData = true;
   }
-  
+
   ngOnInit(): void {
     this.fetchPatientsByPagination(this.currentPage);
 
-    this.patientChangedSub = this.patientSerivce.patientsChanged
-      .subscribe(flag => {
-          this.fetchPatientsByPagination(this.currentPage);
-      })
-    
-    this.totalPagesSub = this.patientSerivce.totalPages
-      .subscribe(data => {
-        this.totalPages = +data;
-        this.numbers = Array(this.totalPages);
-        
-        this.isLoadingData = false;
-      });
+    this.patientChangedSub = this.patientSerivce.patientsChanged.subscribe(
+      (flag) => {
+        this.fetchPatientsByPagination(this.currentPage);
+      }
+    );
 
+    this.totalPagesSub = this.patientSerivce.totalPages.subscribe((data) => {
+      this.totalPages = +data;
+      this.numbers = Array(this.totalPages);
+
+      this.isLoadingData = false;
+    });
   }
 
-  fetchPatientsByPage(pageIndex: number, searchPattern?: string): void{
+  fetchPatientsByPage(pageIndex: number, searchPattern?: string): void {
     this.currentPage = pageIndex;
     this.patientsSub.unsubscribe();
 
     this.fetchPatientsByPagination(pageIndex, searchPattern);
   }
 
-  private fetchPatientsByPagination(pageIndex: number, searchPattern?: string) : void{
-    
-    if(this.isSearchModeActive){
+  private fetchPatientsByPagination(
+    pageIndex: number,
+    searchPattern?: string
+  ): void {
+    if (this.isSearchModeActive) {
       searchPattern = this.searchInput.nativeElement.value;
     }
 
-    this.patientsSub = this.patientSerivce.getPatientsByPage(this.currentPage, searchPattern)
-      .subscribe(
-        (patients: Patient[]) => {
-          this.patients = patients;
-        }
+    this.patientSerivce.getPatientsByPage(this.currentPage, searchPattern);
+
+    this.patientsSub = this.patientSerivce.patients.subscribe(
+      (patients: Patient[]) => {
+        this.patients = patients;
+      }
     );
   }
 
@@ -75,6 +76,4 @@ export class PatientsListComponent implements OnInit {
     this.totalPagesSub.unsubscribe();
     this.patientChangedSub.unsubscribe();
   }
-  
-
 }

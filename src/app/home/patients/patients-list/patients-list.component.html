@@ -25,7 +25,7 @@
           <li class="page-item" [ngClass]="{'disabled' : currentPage == 0}">
             <a class="page-link" (click)="fetchPatientsByPage(currentPage - 1)">
               <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
+              <span class="sr-only">Poprzednia</span>
             </a>
           </li>
           <li class="page-item" *ngFor="num of numbers; let i = index" [ngClass]="{'active' : currentPage == i}"><a
@@ -33,7 +33,7 @@
           </li>
           <li class="page-item" [ngClass]="{'disabled' : currentPage == (totalPages-1)}">
             <a class="page-link" (click)="fetchPatientsByPage(currentPage + 1)">
-              <span class="sr-only">Next</span>
+              <span class="sr-only">Następna</span>
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>

@@ -1,1 +1,25 @@
-<p>upcoming-visits-list works!</p>
+<app-visit-list-item *ngFor="let visit of visits" [visit]="visit"></app-visit-list-item>
+
+
+<!-- PAGINATION -->
+<div *ngIf="totalPages > 1" class="mt-5">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [ngClass]="{'disabled' : currentPage == 0}">
+        <a class="page-link" (click)="getUpcomingVisits(currentPage - 1)">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Poprzednia</span>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="num of numbers; let i = index" [ngClass]="{'active' : currentPage == i}"><a
+          class="page-link" (click)="getUpcomingVisits(i)">{{i + 1}}</a>
+      </li>
+      <li class="page-item" [ngClass]="{'disabled' : currentPage == (totalPages-1)}">
+        <a class="page-link" (click)="getUpcomingVisits(currentPage + 1)">
+          <span class="sr-only">Następna</span>
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

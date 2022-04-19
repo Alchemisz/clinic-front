@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './home/nav-menu/nav-menu.component';
 import { PatientsComponent } from './home/patients/patients.component';
@@ -29,6 +29,8 @@ import { AccountComponent } from './home/account/account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { UpcomingVisitsListComponent } from './home/visits/upcoming-visits-list/upcoming-visits-list.component';
+import { VisitListItemComponent } from './home/visits/visit-list-item/visit-list-item.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { UpcomingVisitsListComponent } from './home/visits/upcoming-visits-list/
     AccountInfoFormComponent,
     AccountComponent,
     UpcomingVisitsListComponent,
+    VisitListItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,9 +64,13 @@ import { UpcomingVisitsListComponent } from './home/visits/upcoming-visits-list/
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
-  providers: [MatSnackBar, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
-  bootstrap: [AppComponent]
+  providers: [
+    MatSnackBar,
+    DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -6,68 +6,68 @@ import { map, Observable, Subject } from 'rxjs';
 import { Patient } from './patient.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PatientsService {
-
   patientsChanged = new Subject<Boolean>();
   totalPages = new Subject<Number>();
+  patients = new Subject<Patient[]>();
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
-
-  public getPatients() : Observable<Patient[]>{
-    return this.http
-      .get<Patient[]>('http://localhost:8080/patient');
+  public getPatients(): Observable<Patient[]> {
+    return this.http.get<Patient[]>('http://localhost:8080/patient');
   }
 
-  public getTotalPages(): Observable<any>{
-    return this.http
-      .get<any>('http://localhost:8080/patient/pageable')
-      .pipe(
-        map(data => {
-          return data.totalPages;
-        })
-      );
+  public getTotalPages(): Observable<any> {
+    return this.http.get<any>('http://localhost:8080/patient/pageable').pipe(
+      map((data) => {
+        return data.totalPages;
+      })
+    );
   }
 
-  public getPatientsByPage(pageIndex: number, searchPattern?: string){
+  public getPatientsByPage(pageIndex: number, searchPattern?: string) {
+    let requestUrl: string =
+      'http://localhost:8080/patient/pageable?page=' + pageIndex;
 
-    let requestUrl: string = 'http://localhost:8080/patient/pageable?page=' + pageIndex;
-
-    if(typeof searchPattern !== 'undefined'){
-      requestUrl = 'http://localhost:8080/patient/pageable?page=' + pageIndex + '&value='+searchPattern;
+    if (typeof searchPattern !== 'undefined') {
+      requestUrl =
+        'http://localhost:8080/patient/pageable?page=' +
+        pageIndex +
+        '&value=' +
+        searchPattern;
     }
 
-    return this.http
+    this.http
       .get<any>(requestUrl)
       .pipe(
-        map(data => {
+        map((data) => {
           this.totalPages.next(data.totalPages);
           return data.content;
         })
-      );
+      )
+      .subscribe((patients: Patient[]) => {
+        this.patients.next(patients);
+      });
   }
 
-  public deleteByPesel(pesel: string){
+  public deleteByPesel(pesel: string) {
     this.http
       .delete('http://localhost:8080/patient/' + pesel)
-        .subscribe(response => {
-          console.log(response)
-          this.patientsChanged.next(true);
-        });
+      .subscribe((response) => {
+        console.log(response);
+        this.patientsChanged.next(true);
+      });
   }
 
-  public generatePassword(): string{
-    console.log("No implementation GENERATE_PASSWORD (patient_service)");
-    return "";
+  public generatePassword(): string {
+    console.log('No implementation GENERATE_PASSWORD (patient_service)');
+    return '';
   }
 
-  public generatePesel(): string{
-    console.log("No implementation GENERATE_PESEL (patient_service)");
-    return "";
+  public generatePesel(): string {
+    console.log('No implementation GENERATE_PESEL (patient_service)');
+    return '';
   }
-
 }

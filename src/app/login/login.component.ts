@@ -7,39 +7,31 @@ import { AuthResponseData, AuthService } from '../auth/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnDestroy {
-
   authSubScription!: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnDestroy(): void {
     this.authSubScription.unsubscribe();
   }
 
-  onLogin(loginFormRef: NgForm){
-    
+  onLogin(loginFormRef: NgForm) {
     let authObs: Observable<AuthResponseData>;
-    
+
     // authObs = this.authService.login(
     //   loginFormRef.value['login'],
     //   loginFormRef.value['password']
     //   );
 
-    authObs = this.authService.login(
-      "user",
-      "password"
-    );
+    authObs = this.authService.login('admin', 'password');
 
-    this.authSubScription = authObs.subscribe(
-      response => {
-        console.log(response);
-        this.router.navigate(['/pacjenci']);
-      }
-    );
-
+    this.authSubScription = authObs.subscribe((response) => {
+      console.log(response);
+      this.authService.getUserRoles();
+      // this.router.navigate(['/pacjenci']);
+    });
   }
-
 }
