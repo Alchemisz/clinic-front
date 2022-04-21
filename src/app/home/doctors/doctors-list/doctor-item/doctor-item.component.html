@@ -8,7 +8,7 @@
     </span>
   </div>
   <div class="col-md-4 text-center border">
-    <button class="btn-sm btn-secondary m-1">Szczegóły</button>
-    <button class="btn-sm btn-danger m-1">Usuń</button>
+    <button class="btn-sm btn-secondary m-1" (click)="showDetails(doctor.id)">Szczegóły</button>
+    <button class="btn-sm btn-danger m-1" (click)="deleteDoctor()">Usuń</button>
   </div>
 </div>

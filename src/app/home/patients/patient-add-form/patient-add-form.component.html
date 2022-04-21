@@ -35,14 +35,14 @@
           <div class="form-group mt-3">
             <label>Imię:</label>
             <input type="text" class="form-control" placeholder="Wprowadź imię" name="firstName" ngModel required
-              pattern="[a-z]*" #firstName="ngModel">
+              #firstName="ngModel">
             <small class="help-message" *ngIf="!firstName.valid && firstName.touched">To pole jest wymagane</small>
           </div>
 
           <div class="form-group mt-3 mb-2">
             <label>Nazwisko:</label>
             <input type="text" class="form-control" placeholder="Wprowadź nazwisko" name="lastName" ngModel required
-              pattern="[a-z]*" #lastName="ngModel">
+              #lastName="ngModel">
             <small class="help-message" *ngIf="!lastName.valid && lastName.touched">To pole jest wymagane</small>
           </div>
 

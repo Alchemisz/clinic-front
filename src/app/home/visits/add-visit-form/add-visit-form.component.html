@@ -1,1 +1,73 @@
-<p>add-visit-form works!</p>
+<div class="row justify-content-center">
+  <form class="row" #formRef="ngForm" (ngSubmit)="onFormSubmit(formRef)">
+
+    <!-- DANE PODSTAWOWE -->
+    <div class="col-xl-6 mt-4 mb-4">
+
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title">Wprowadź dane podstawowe</h5>
+          <!-- PESEL -->
+          <div class="form-group mt-3">
+            <label>Pesel:</label>
+
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Wprowadź pesel pacjenta" name="pesel" ngModel
+                #peselInput #pesel="ngModel" required>
+              <button type="button" class="btn btn-outline-secondary" (click)="confirmPesel()">
+                Zatwierdź
+              </button>
+              <small>Imie i nazwisko zostanie automatycznie uzupełnione po wprowadzeniu numeru
+                pesel</small><br>
+              <small class="help-message" *ngIf="!pesel.valid && pesel.touched">To pole jest wymagane</small>
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <label>Imię:</label>
+            <input type="text" class="form-control" placeholder="Wprowadź imię" name="firstName" ngModel required
+              #firstName="ngModel" disabled>
+          </div>
+
+          <div class="form-group mt-3 mb-2">
+            <label>Nazwisko:</label>
+            <input type="text" class="form-control" placeholder="Wprowadź nazwisko" name="lastName" ngModel required
+              #lastName="ngModel" disabled>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-6 mb-4">
+
+
+      <div class="card shadow mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Wybierz lekarza z listy</h5>
+
+          <div class="form-group mt-3">
+            <label>Data wizyty:</label>
+            <input type="date" class="form-control" name="visitDate" ngModel required #dateOfBirth="ngModel">
+            <small class="help-message" *ngIf="!dateOfBirth.valid && dateOfBirth.touched">To pole jest wymagane</small>
+          </div>
+
+          <select class="form-select mt-3" aria-label="Default select example" name="doctor"
+            aria-placeholder="Wybierz lekarza..." required>
+            <option *ngFor="let doctor of doctors">
+              {{doctor.firstName + " " + doctor.lastName}}
+            </option>
+          </select>
+
+          <div class="form-group mt-4 mb-2">
+            <button class="btn btn-success" type="submit" [disabled]="!formRef.valid">
+              Dodaj wizytę
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

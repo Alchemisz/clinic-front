@@ -11,14 +11,14 @@
           <div class="form-group mt-3">
             <label>Imię:</label>
             <input type="text" class="form-control" placeholder="Wprowadź imię" name="firstName" ngModel required
-              #firstName="ngModel">
+              #firstName="ngModel" [disabled]="!isEditMode">
             <small class="help-message" *ngIf="!firstName.valid && firstName.touched">To pole jest wymagane</small>
           </div>
 
           <div class="form-group mt-3 mb-2">
             <label>Nazwisko:</label>
             <input type="text" class="form-control" placeholder="Wprowadź nazwisko" name="lastName" ngModel required
-              #lastName="ngModel">
+              #lastName="ngModel" [disabled]="!isEditMode">
             <small class="help-message" *ngIf="!lastName.valid && lastName.touched">To pole jest wymagane</small>
           </div>
 
@@ -32,25 +32,11 @@
 
           <div class=" form-group mt-3">
 
-            <mat-form-field class="example-chip-list" appearance="fill">
-              <mat-label>Specjalizacje</mat-label>
-              <mat-chip-list #chipList aria-label="Fruit selection">
-                <mat-chip *ngFor="let choosenSpec of choosenSpecializations" (removed)="remove(choosenSpec)">
-                  {{choosenSpec}}
-                  <button matChipRemove>
-                    <mat-icon>cancel</mat-icon>
-                  </button>
-                </mat-chip>
-                <input placeholder="Specjalizacje..." #specializationsInput [formControl]="specializationsCtrl"
-                  [matAutocomplete]="auto" [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
-              </mat-chip-list>
-              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-                  {{fruit}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
+            <mat-chip-list aria-label="Dog selection">
+              <mat-chip *ngFor="let spec of specializations">
+                {{spec.name}}
+              </mat-chip>
+            </mat-chip-list>
 
           </div>
 
@@ -70,7 +56,7 @@
           <div class="form-group mt-3">
             <label>Kod pocztowy:</label>
             <input type="text" class="form-control" placeholder="Wprowadź kod pocztowy" name="postCode" ngModel required
-              pattern="\d{2}-\d{3}" #postCode="ngModel">
+              pattern="\d{2}-\d{3}" #postCode="ngModel" [disabled]="!isEditMode">
             <small class="help-message" *ngIf="!postCode.valid && postCode.touched">Kod pocztowy powinien spełniać
               format
               "XX-XXX"</small>
@@ -79,20 +65,24 @@
           <div class=" form-group mt-3">
             <label>Miejscowość:</label>
             <input type="text" class="form-control" placeholder="Wprowadź miejscowość" name="city" ngModel required
-              #city="ngModel">
+              #city="ngModel" [disabled]="!isEditMode">
             <small class="help-message" *ngIf="!city.valid && city.touched">To pole jest wymagane</small>
           </div>
 
           <div class="form-group mt-3">
             <label>Numer domu:</label>
             <input type="text" class="form-control" placeholder="Wprowadź numer domu" name="homeNumber" ngModel required
-              #homeNumber="ngModel">
+              #homeNumber="ngModel" [disabled]="!isEditMode">
             <small class="help-message" *ngIf="!homeNumber.valid && homeNumber.touched">To pole jest wymagane</small>
           </div>
 
           <div class="form-group mt-4 mb-2">
-            <button class="btn btn-primary" type="submit" [disabled]="!formRef.valid">
-              Dodaj lekarza
+            <button class="btn btn-success" type="button" (click)="turnOnEditMode()">
+              Włącz tryb edycji
+            </button>
+            |
+            <button class="btn btn-primary" type="submit" [disabled]="!formRef.valid || !isEditMode">
+              Edytuj dane lekarza
             </button>
           </div>
 

@@ -14,7 +14,7 @@ import { PatientsListComponent } from './home/patients/patients-list/patients-li
 import { PatientItemComponent } from './home/patients/patients-list/patient-item/patient-item.component';
 import { PatientsNavMenuComponent } from './home/patients/patients-nav-menu/patients-nav-menu.component';
 import { PatientAddFormComponent } from './home/patients/patient-add-form/patient-add-form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DoctorNavMenuComponent } from './home/doctors/doctor-nav-menu/doctor-nav-menu.component';
 import { DoctorsListComponent } from './home/doctors/doctors-list/doctors-list.component';
 import { DoctorAddFormComponent } from './home/doctors/doctor-add-form/doctor-add-form.component';
@@ -32,6 +32,19 @@ import { UpcomingVisitsListComponent } from './home/visits/upcoming-visits-list/
 import { VisitListItemComponent } from './home/visits/visit-list-item/visit-list-item.component';
 import { DatePipe } from '@angular/common';
 import { PatientDetailsComponent } from './home/patients/patient-details/patient-details.component';
+import { DoctorDetailsComponent } from './home/doctors/doctor-details/doctor-details.component';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {
+  MatChip,
+  MatChipsModule,
+  MAT_CHIPS_DEFAULT_OPTIONS,
+} from '@angular/material/chips';
+import {
+  MatFormField,
+  MatFormFieldModule,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -59,6 +72,7 @@ import { PatientDetailsComponent } from './home/patients/patient-details/patient
     UpcomingVisitsListComponent,
     VisitListItemComponent,
     PatientDetailsComponent,
+    DoctorDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,11 +81,22 @@ import { PatientDetailsComponent } from './home/patients/patient-details/patient
     FormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatIconModule,
   ],
   providers: [
     MatSnackBar,
     DatePipe,
+    MatChip,
+    MatIcon,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'fill' },
+    },
   ],
   bootstrap: [AppComponent],
 })
