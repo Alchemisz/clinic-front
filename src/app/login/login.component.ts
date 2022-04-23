@@ -21,12 +21,12 @@ export class LoginComponent implements OnDestroy {
   onLogin(loginFormRef: NgForm) {
     let authObs: Observable<AuthResponseData>;
 
-    // authObs = this.authService.login(
-    //   loginFormRef.value['login'],
-    //   loginFormRef.value['password']
-    //   );
+    authObs = this.authService.login(
+      loginFormRef.value['login'],
+      loginFormRef.value['password']
+    );
 
-    authObs = this.authService.login('admin', 'password');
+    // authObs = this.authService.login('user', 'password');
 
     this.authSubScription = authObs.subscribe((response) => {
       console.log(response);

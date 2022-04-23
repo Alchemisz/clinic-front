@@ -17,10 +17,11 @@
               <button type="button" class="btn btn-outline-secondary" (click)="confirmPesel()">
                 Zatwierdź
               </button>
-              <small>Imie i nazwisko zostanie automatycznie uzupełnione po wprowadzeniu numeru
-                pesel</small><br>
-              <small class="help-message" *ngIf="!pesel.valid && pesel.touched">To pole jest wymagane</small>
             </div>
+            <small>Imie i nazwisko zostanie automatycznie uzupełnione po wprowadzeniu numeru
+              pesel</small>
+            <br>
+            <small class="help-message" *ngIf="!pesel.valid && pesel.touched">To pole jest wymagane</small>
           </div>
 
           <div class="form-group mt-3">
@@ -48,12 +49,13 @@
 
           <div class="form-group mt-3">
             <label>Data wizyty:</label>
-            <input type="date" class="form-control" name="visitDate" ngModel required #dateOfBirth="ngModel">
-            <small class="help-message" *ngIf="!dateOfBirth.valid && dateOfBirth.touched">To pole jest wymagane</small>
+            <input type="date" class="form-control" name="visitDate" ngModel required #visitDate="ngModel">
+            <small class="help-message" *ngIf="!visitDate.valid && visitDate.touched">To pole jest wymagane</small>
           </div>
 
-          <select class="form-select mt-3" aria-label="Default select example" name="doctor"
+          <select class="form-select mt-3" aria-label="Default select example" name="doctor" ngModel #doctor="ngModel"
             aria-placeholder="Wybierz lekarza..." required>
+            <option>Wybierz lekarza...</option>
             <option *ngFor="let doctor of doctors">
               {{doctor.firstName + " " + doctor.lastName}}
             </option>

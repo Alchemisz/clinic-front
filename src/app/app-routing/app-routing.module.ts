@@ -16,6 +16,7 @@ import { AccountComponent } from '../home/account/account.component';
 import { UpcomingVisitsListComponent } from '../home/visits/upcoming-visits-list/upcoming-visits-list.component';
 import { PatientDetailsComponent } from '../home/patients/patient-details/patient-details.component';
 import { DoctorDetailsComponent } from '../home/doctors/doctor-details/doctor-details.component';
+import { PatientVisitsComponent } from '../home/visits/patient-visits/patient-visits.component';
 
 const appRoutes: Routes = [
   {
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
           { path: 'dodaj', component: AddVisitFormComponent },
         ],
       },
+      { path: 'pacjent', component: PatientVisitsComponent },
       { path: 'konto', component: AccountComponent },
     ],
     canActivate: [AuthGuard],

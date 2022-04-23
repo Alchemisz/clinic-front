@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, Subject, tap } from 'rxjs';
 import { User } from './user.model';
 
 export interface AuthResponseData {
@@ -14,6 +14,7 @@ export interface AuthResponseData {
 export class AuthService {
   user = new BehaviorSubject<User | null>(null);
   userRoles!: { authority: string }[];
+  pesel = new Subject<string>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -30,10 +31,23 @@ export class AuthService {
       );
   }
 
+  getPatientUserPesel() {
+    this.http
+      .get('http://localhost:8080/patient/pesel')
+      .subscribe((response) => {
+        this.pesel.next(response as string);
+      });
+  }
+
   getUserRoles() {
     this.http.get('http://localhost:8080/user/roles').subscribe((response) => {
       this.userRoles = response as { authority: string }[];
-      this.router.navigate(['/pacjenci']);
+      if (this.userRoles[0].authority === 'ROLE_ADMIN') {
+        this.router.navigate(['/pacjenci']);
+      }
+      if (this.userRoles[0].authority === 'ROLE_USER') {
+        this.router.navigate(['/pacjent']);
+      }
     });
   }
 

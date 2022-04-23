@@ -11,6 +11,7 @@ import { DoctorsService } from '../../doctors/doctors.service';
 import { Doctor } from '../../doctors/model/doctor.model';
 import { Patient } from '../../patients/patient.model';
 import { PatientsService } from '../../patients/patients.service';
+import { VisitsService } from '../visits.service';
 
 @Component({
   selector: 'app-add-visit-form',
@@ -27,7 +28,8 @@ export class AddVisitFormComponent implements OnInit, AfterViewInit {
 
   constructor(
     private doctorsService: DoctorsService,
-    private patientService: PatientsService
+    private patientService: PatientsService,
+    private visitsService: VisitsService
   ) {}
 
   ngAfterViewInit(): void {
@@ -48,11 +50,31 @@ export class AddVisitFormComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onFormSubmit(formRef: NgForm) {}
+  onFormSubmit(formRef: NgForm) {
+    let doctorId = this.getDoctorIdByData(formRef.value['doctor']);
+    let patientPesel = formRef.value['pesel'];
+    let visitDate = formRef.value['visitDate'];
+
+    let addVisitCommand = {
+      doctorId: doctorId,
+      patientPesel: patientPesel,
+      visitDate: visitDate,
+    };
+
+    this.visitsService.addVisit(addVisitCommand);
+  }
 
   confirmPesel() {
-    console.log(this.peselInput.nativeElement.value);
-
     this.patientService.getPatientByPesel(this.peselInput.nativeElement.value);
+  }
+
+  private getDoctorIdByData(doctorData: string): number {
+    let doctorId = +this.doctors
+      .filter((doctor: Doctor) => {
+        let data = doctor.firstName + ' ' + doctor.lastName;
+        return data === doctorData;
+      })
+      .map((doctor) => doctor.id);
+    return doctorId;
   }
 }

@@ -45,6 +45,8 @@ import {
   MatFormFieldModule,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
 } from '@angular/material/form-field';
+import { PatientVisitsComponent } from './home/visits/patient-visits/patient-visits.component';
+import { PatientVisitItemComponent } from './home/visits/patient-visits/patient-visit-item/patient-visit-item.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import {
     VisitListItemComponent,
     PatientDetailsComponent,
     DoctorDetailsComponent,
+    PatientVisitsComponent,
+    PatientVisitItemComponent,
   ],
   imports: [
     BrowserModule,
