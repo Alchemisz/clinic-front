@@ -55,6 +55,14 @@ export class VisitsService {
       });
   }
 
+  endVisit(visitId: number) {
+    this.http
+      .patch('http://localhost:8080/visit/end/' + visitId, null)
+      .subscribe((response) => {
+        this.visitsChanged.next(true);
+      });
+  }
+
   getUpcomingPatientVisits(pesel: number) {
     this.http
       .get<any>('http://localhost:8080/visit/upcoming/patient/' + pesel)

@@ -41,9 +41,6 @@ export class UpcomingVisitsListComponent implements OnInit, OnDestroy {
 
   getUpcomingVisits(pageIndex: number): void {
     this.currentPage = pageIndex;
-    console.log('PAGES:' + this.totalPages);
-    console.log(pageIndex);
-
     this.visitsService.getUpcomingVisits(pageIndex);
   }
 

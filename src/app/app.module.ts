@@ -50,6 +50,7 @@ import { PatientVisitItemComponent } from './home/visits/patient-visits/patient-
 import { PatientHeaderListItemComponent } from './home/patients/patients-list/patient-header-list-item/patient-header-list-item.component';
 import { PatientVisitsHeaderListItemComponent } from './home/patients/patients-list/patient-visits-header-list-item/patient-visits-header-list-item.component';
 import { DoctorsHeaderListItemComponent } from './home/doctors/doctors-list/doctors-header-list-item/doctors-header-list-item.component';
+import { VisitUpcomingListItemComponent } from './home/visits/visit-upcoming-list-item/visit-upcoming-list-item.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { DoctorsHeaderListItemComponent } from './home/doctors/doctors-list/doct
     PatientHeaderListItemComponent,
     PatientVisitsHeaderListItemComponent,
     DoctorsHeaderListItemComponent,
+    VisitUpcomingListItemComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { VisitsService } from '../visits/visits.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -10,7 +11,11 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class NavMenuComponent implements OnInit {
   userRole!: string;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private visitServiceL: VisitsService
+  ) {}
 
   ngOnInit(): void {
     this.userRole = this.authService.userRoles[0].authority;

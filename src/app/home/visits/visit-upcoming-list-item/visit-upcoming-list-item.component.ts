@@ -1,18 +1,16 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Visit } from '../../visit-nav-menu/visit.model';
-import { VisitsService } from '../../visits.service';
+import { Visit } from '../visit-nav-menu/visit.model';
+import { VisitsService } from '../visits.service';
 
 @Component({
-  selector: 'app-patient-visit-item',
-  templateUrl: './patient-visit-item.component.html',
-  styleUrls: ['./patient-visit-item.component.css'],
+  selector: 'app-visit-upcoming-list-item',
+  templateUrl: './visit-upcoming-list-item.component.html',
+  styleUrls: ['./visit-upcoming-list-item.component.css'],
 })
-export class PatientVisitItemComponent implements OnInit {
+export class VisitUpcomingListItemComponent implements OnInit {
   @Input()
   visit!: Visit;
-  @Input()
-  pesel!: string;
   visitDate!: string | null;
 
   constructor(

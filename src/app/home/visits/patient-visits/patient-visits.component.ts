@@ -15,7 +15,9 @@ export class PatientVisitsComponent
 {
   visits: Visit[] = [];
   visitsSub!: Subscription;
+  visitsChangedSub!: Subscription;
   peselSub!: Subscription;
+  pesel!: string;
 
   constructor(
     private visitsService: VisitsService,
@@ -25,6 +27,7 @@ export class PatientVisitsComponent
   ngOnDestroy(): void {
     this.visitsSub.unsubscribe();
     this.peselSub.unsubscribe();
+    this.visitsChangedSub.unsubscribe();
   }
 
   ngAfterViewInit(): void {}
@@ -33,7 +36,15 @@ export class PatientVisitsComponent
     this.visitsSub = this.visitsService.visits.subscribe((visits: Visit[]) => {
       this.visits = visits;
     });
+
+    this.visitsChangedSub = this.visitsService.visitsChanged.subscribe(
+      (flag) => {
+        this.visitsService.getUpcomingPatientVisits(+this.pesel);
+      }
+    );
+
     this.peselSub = this.authService.pesel.subscribe((pesel) => {
+      this.pesel = pesel;
       this.visitsService.getUpcomingPatientVisits(+pesel);
     });
     this.authService.getPatientUserPesel();
