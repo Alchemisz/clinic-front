@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 import { DoctorsService } from '../../doctors/doctors.service';
 import { Doctor } from '../../doctors/model/doctor.model';
 import { Patient } from '../../patients/patient.model';
@@ -29,7 +30,8 @@ export class AddVisitFormComponent implements OnInit, AfterViewInit {
   constructor(
     private doctorsService: DoctorsService,
     private patientService: PatientsService,
-    private visitsService: VisitsService
+    private visitsService: VisitsService,
+    private snackBarService: SnackBarService
   ) {}
 
   ngAfterViewInit(): void {
@@ -62,6 +64,7 @@ export class AddVisitFormComponent implements OnInit, AfterViewInit {
     };
 
     this.visitsService.addVisit(addVisitCommand);
+    this.snackBarService.openSnackBar('Wizyta dodana', 'Zamknij');
   }
 
   confirmPesel() {

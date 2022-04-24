@@ -29,9 +29,7 @@ export class LoginComponent implements OnDestroy {
     // authObs = this.authService.login('user', 'password');
 
     this.authSubScription = authObs.subscribe((response) => {
-      console.log(response);
-      this.authService.getUserRoles();
-      // this.router.navigate(['/pacjenci']);
+      this.authService.navigateByUserRole();
     });
   }
 }

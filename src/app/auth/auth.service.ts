@@ -39,7 +39,7 @@ export class AuthService {
       });
   }
 
-  getUserRoles() {
+  navigateByUserRole() {
     this.http.get('http://localhost:8080/user/roles').subscribe((response) => {
       this.userRoles = response as { authority: string }[];
       if (this.userRoles[0].authority === 'ROLE_ADMIN') {

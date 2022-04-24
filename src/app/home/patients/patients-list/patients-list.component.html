@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div *ngIf="!isLoadingData" class="col-md-10">
     <!-- SEARCH INPUT -->
-    <div class="col-md-12 mt-4 mb-4">
+    <div class="col-md-12 mt-3">
       <div class="form-group">
         <label class="mb-2 h5">Wprowadź dane pacjenta:</label>
         <div class="input-group mb-1">
@@ -16,6 +16,7 @@
     </div>
 
     <!-- PATIENTS LIST -->
+    <app-patient-header-list-item></app-patient-header-list-item>
     <app-patient-item *ngFor="let patientEl of patients" [patient]="patientEl"></app-patient-item>
 
     <!-- PAGINATION -->

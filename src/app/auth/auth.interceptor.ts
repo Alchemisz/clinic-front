@@ -27,10 +27,6 @@ export class AuthInterceptor implements HttpInterceptor {
         const modifiedRequest = request.clone({
           headers: request.headers.set('Authorization', 'Bearer ' + user.token),
         });
-
-        // console.log("Wyslano: ");
-        // console.log(modifiedRequest);
-
         return next.handle(modifiedRequest);
       })
     );

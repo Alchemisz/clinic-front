@@ -4,6 +4,7 @@ import { FormControl, NgForm } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { map, Observable, startWith } from 'rxjs';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 import { DoctorsService } from '../doctors.service';
 
 @Component({
@@ -12,13 +13,6 @@ import { DoctorsService } from '../doctors.service';
   styleUrls: ['./doctor-add-form.component.css'],
 })
 export class DoctorAddFormComponent implements OnInit {
-  ngOnInit(): void {}
-
-  onFormSubmit(formRef: NgForm) {
-    console.log('DODANO LEKARZA!');
-    console.log(formRef.value);
-  }
-
   separatorKeysCodes: number[] = [ENTER, COMMA];
   specializationsCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
@@ -27,7 +21,29 @@ export class DoctorAddFormComponent implements OnInit {
 
   @ViewChild('specializationsInput') fruitInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private doctorService: DoctorsService) {
+  ngOnInit(): void {}
+
+  onFormSubmit(formRef: NgForm) {
+    this.snackBarService.openSnackBar('Dodano lekarza!', 'Zamknij');
+
+    formRef.form.addControl('specializations', this.specializationsCtrl);
+
+    formRef.form.patchValue({
+      specializations: this.choosenSpecializations,
+    });
+
+    console.log(formRef.value);
+    this.choosenSpecializations = [];
+    this.specializationsCtrl.reset();
+    this.specializationsCtrl.markAsPristine();
+    this.specializationsCtrl.markAsUntouched();
+    formRef.reset();
+  }
+
+  constructor(
+    private doctorService: DoctorsService,
+    private snackBarService: SnackBarService
+  ) {
     this.filteredFruits = this.specializationsCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) =>
@@ -73,8 +89,8 @@ export class DoctorAddFormComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allSpecializations.filter((fruit) =>
-      fruit.toLowerCase().includes(filterValue)
+    return this.allSpecializations.filter((specialization) =>
+      specialization.toLowerCase().includes(filterValue)
     );
   }
 }

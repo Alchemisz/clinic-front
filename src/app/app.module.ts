@@ -47,6 +47,9 @@ import {
 } from '@angular/material/form-field';
 import { PatientVisitsComponent } from './home/visits/patient-visits/patient-visits.component';
 import { PatientVisitItemComponent } from './home/visits/patient-visits/patient-visit-item/patient-visit-item.component';
+import { PatientHeaderListItemComponent } from './home/patients/patients-list/patient-header-list-item/patient-header-list-item.component';
+import { PatientVisitsHeaderListItemComponent } from './home/patients/patients-list/patient-visits-header-list-item/patient-visits-header-list-item.component';
+import { DoctorsHeaderListItemComponent } from './home/doctors/doctors-list/doctors-header-list-item/doctors-header-list-item.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,9 @@ import { PatientVisitItemComponent } from './home/visits/patient-visits/patient-
     DoctorDetailsComponent,
     PatientVisitsComponent,
     PatientVisitItemComponent,
+    PatientHeaderListItemComponent,
+    PatientVisitsHeaderListItemComponent,
+    DoctorsHeaderListItemComponent,
   ],
   imports: [
     BrowserModule,

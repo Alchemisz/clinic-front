@@ -33,27 +33,33 @@
           <div class=" form-group mt-3">
 
             <mat-form-field class="example-chip-list" appearance="fill">
+
               <mat-label>Specjalizacje</mat-label>
-              <mat-chip-list #chipList aria-label="Fruit selection">
+
+              <mat-chip-list #chipList>
+
                 <mat-chip *ngFor="let choosenSpec of choosenSpecializations" (removed)="remove(choosenSpec)">
                   {{choosenSpec}}
                   <button matChipRemove>
                     <mat-icon>cancel</mat-icon>
                   </button>
                 </mat-chip>
+
                 <input placeholder="Specjalizacje..." #specializationsInput [formControl]="specializationsCtrl"
                   [matAutocomplete]="auto" [matChipInputFor]="chipList"
                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+
               </mat-chip-list>
+
               <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                 <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
                   {{fruit}}
                 </mat-option>
               </mat-autocomplete>
+
             </mat-form-field>
 
           </div>
-
         </div>
       </div>
 
