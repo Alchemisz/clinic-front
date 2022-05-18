@@ -13,12 +13,24 @@ export class PatientAddFormComponent implements OnInit {
   @ViewChild('formRef')
   patientForm!: NgForm;
 
-  constructor(private snackBarService: SnackBarService) {}
+  constructor(private patientService: PatientsService) {}
 
   ngOnInit(): void {}
 
-  onFormSubmit() {
-    this.snackBarService.openSnackBar('Dodano pacjenta!', 'Zamknij');
+  onFormSubmit(formRef: NgForm) {
+    let createPatientCommand = {
+      username: formRef.value['username'],
+      password: formRef.value['password'],
+      firstName: formRef.value['firstName'],
+      lastName: formRef.value['lastName'],
+      pesel: formRef.value['pesel'],
+      address: {
+        postCode: formRef.value['postCode'],
+        city: formRef.value['city'],
+        houseNumber: formRef.value['homeNumber'],
+      },
+    };
+    this.patientService.addPatient(createPatientCommand);
     this.patientForm.form.reset();
   }
 

@@ -3,7 +3,22 @@ import { STRING_TYPE } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable, Subject } from 'rxjs';
+import { Address } from 'src/app/shared/address.model';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 import { Patient } from './patient.model';
+
+interface createPatientCommand {
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  pesel: string;
+  address: {
+    postCode: string;
+    city: string;
+    houseNumber: string;
+  };
+}
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +29,21 @@ export class PatientsService {
   patients = new Subject<Patient[]>();
   patient = new Subject<Patient>();
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private snackBarService: SnackBarService
+  ) {}
+
+  addPatient(createPatientCommand: createPatientCommand) {
+    console.log('WYSYŁAM: ');
+    console.log(createPatientCommand);
+
+    this.http
+      .post('http://localhost:8080/patient', createPatientCommand)
+      .subscribe((response) => {
+        this.snackBarService.openSnackBar('Dodano pacjenta!', 'Zamknij');
+      });
+  }
 
   public getPatients(): Observable<Patient[]> {
     return this.http.get<Patient[]>('http://localhost:8080/patient');
