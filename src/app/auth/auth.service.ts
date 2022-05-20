@@ -6,6 +6,7 @@ import { User } from './user.model';
 
 export interface AuthResponseData {
   jwt: string;
+  userId: number;
 }
 
 @Injectable({
@@ -26,7 +27,11 @@ export class AuthService {
       })
       .pipe(
         tap((responseData) => {
-          this.handleAuthentication(username, responseData.jwt);
+          this.handleAuthentication(
+            username,
+            responseData.jwt,
+            responseData.userId
+          );
         })
       );
   }
@@ -51,8 +56,12 @@ export class AuthService {
     });
   }
 
-  private handleAuthentication(username: string, token: string) {
-    const user = new User(username, token);
+  private handleAuthentication(
+    username: string,
+    token: string,
+    userId: number
+  ) {
+    const user = new User(username, token, userId);
     this.user.next(user);
   }
 }

@@ -28,6 +28,7 @@ export class PatientsService {
   totalPages = new Subject<Number>();
   patients = new Subject<Patient[]>();
   patient = new Subject<Patient>();
+  pesel = new Subject<string>();
 
   constructor(
     private http: HttpClient,
@@ -47,6 +48,16 @@ export class PatientsService {
 
   public getPatients(): Observable<Patient[]> {
     return this.http.get<Patient[]>('http://localhost:8080/patient');
+  }
+
+  public generatePesel(dateOfBirth: any) {
+    this.http
+      .post<any>('http://localhost:8080/patient/pesel/generate', dateOfBirth)
+      .subscribe((response) => {
+        console.log(response);
+
+        this.pesel.next(response as string);
+      });
   }
 
   public getTotalPages(): Observable<any> {
@@ -101,11 +112,6 @@ export class PatientsService {
 
   public generatePassword(): string {
     console.log('No implementation GENERATE_PASSWORD (patient_service)');
-    return '';
-  }
-
-  public generatePesel(): string {
-    console.log('No implementation GENERATE_PESEL (patient_service)');
     return '';
   }
 }

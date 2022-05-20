@@ -1,19 +1,40 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { PatientsService } from '../patients.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarService } from 'src/app/shared/snack-bar.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-patient-add-form',
   templateUrl: './patient-add-form.component.html',
   styleUrls: ['./patient-add-form.component.css'],
 })
-export class PatientAddFormComponent implements OnInit {
+export class PatientAddFormComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   @ViewChild('formRef')
   patientForm!: NgForm;
+  peselSub!: Subscription;
 
   constructor(private patientService: PatientsService) {}
+
+  ngOnDestroy(): void {
+    this.peselSub.unsubscribe();
+  }
+  ngAfterViewInit(): void {
+    this.peselSub = this.patientService.pesel.subscribe((pesel) => {
+      this.patientForm.form.patchValue({
+        pesel: pesel,
+      });
+    });
+  }
 
   ngOnInit(): void {}
 
@@ -35,9 +56,8 @@ export class PatientAddFormComponent implements OnInit {
   }
 
   generatePesel(): void {
-    this.patientForm.form.patchValue({
-      // pesel: this.patientService.generatePesel()
-      pesel: '99112233654',
+    this.patientService.generatePesel({
+      dateOfBirth: this.patientForm.value['dateOfBirth'],
     });
   }
 

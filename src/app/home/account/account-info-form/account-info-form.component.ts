@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/auth/user.model';
@@ -6,10 +13,11 @@ import { User } from 'src/app/auth/user.model';
 @Component({
   selector: 'app-account-info-form',
   templateUrl: './account-info-form.component.html',
-  styleUrls: ['./account-info-form.component.css']
+  styleUrls: ['./account-info-form.component.css'],
 })
-export class AccountInfoFormComponent implements OnInit, OnDestroy, AfterViewInit {
-
+export class AccountInfoFormComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   user!: User | null;
   userSub!: Subscription;
 
@@ -27,9 +35,8 @@ export class AccountInfoFormComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe(user => {
+    this.userSub = this.authService.user.subscribe((user) => {
       this.user = user;
     });
   }
-
 }

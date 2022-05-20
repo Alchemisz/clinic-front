@@ -17,6 +17,8 @@ import { UpcomingVisitsListComponent } from '../home/visits/upcoming-visits-list
 import { PatientDetailsComponent } from '../home/patients/patient-details/patient-details.component';
 import { DoctorDetailsComponent } from '../home/doctors/doctor-details/doctor-details.component';
 import { PatientVisitsComponent } from '../home/visits/patient-visits/patient-visits.component';
+import { AccountInfoFormComponent } from '../home/account/account-info-form/account-info-form.component';
+import { ChangePasswordFormComponent } from '../home/account/change-password-form/change-password-form.component';
 
 const appRoutes: Routes = [
   {
@@ -54,7 +56,14 @@ const appRoutes: Routes = [
         ],
       },
       { path: 'pacjent', component: PatientVisitsComponent },
-      { path: 'konto', component: AccountComponent },
+      {
+        path: 'konto',
+        component: AccountComponent,
+        children: [
+          { path: '', component: AccountInfoFormComponent },
+          { path: 'zmien-haslo', component: ChangePasswordFormComponent },
+        ],
+      },
     ],
     canActivate: [AuthGuard],
   },
