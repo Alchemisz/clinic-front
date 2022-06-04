@@ -20,9 +20,14 @@ export class UpcomingVisitsListComponent implements OnInit, OnDestroy {
   constructor(private visitsService: VisitsService) {}
 
   ngOnInit(): void {
-    this.visitsSub = this.visitsService.visits.subscribe(
-      (visits: Visit[]) => (this.visits = visits)
-    );
+    this.visitsSub = this.visitsService.visits.subscribe((visits: Visit[]) => {
+      if (visits.length === 0) {
+        this.visitsService.getUpcomingVisits(
+          this.currentPage != 0 ? this.currentPage - 1 : this.currentPage
+        );
+      }
+      this.visits = visits;
+    });
 
     this.totalPageSub = this.visitsService.totalPages.subscribe(
       (totalPages: number) => {

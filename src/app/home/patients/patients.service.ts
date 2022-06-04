@@ -36,13 +36,23 @@ export class PatientsService {
   ) {}
 
   addPatient(createPatientCommand: createPatientCommand) {
-    console.log('WYSYŁAM: ');
-    console.log(createPatientCommand);
-
     this.http
       .post('http://localhost:8080/patient', createPatientCommand)
       .subscribe((response) => {
         this.snackBarService.openSnackBar('Dodano pacjenta!', 'Zamknij');
+      });
+  }
+
+  public updatePatient(updatePatientCommand: any) {
+    this.http
+      .patch('http://localhost:8080/patient/update', updatePatientCommand)
+      .subscribe((response) => {
+        this.snackBarService.openSnackBar(
+          'Dane pacjenta zostały edytowane!',
+          'Zamknij'
+        );
+
+        this.getPatientByPesel(updatePatientCommand['pesel']);
       });
   }
 
@@ -105,7 +115,7 @@ export class PatientsService {
     this.http
       .delete('http://localhost:8080/patient/' + pesel)
       .subscribe((response) => {
-        console.log(response);
+        this.snackBarService.openSnackBar('Usunięto pacjenta!', 'Zamknij');
         this.patientsChanged.next(true);
       });
   }

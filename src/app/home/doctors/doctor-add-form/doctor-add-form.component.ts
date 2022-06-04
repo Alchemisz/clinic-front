@@ -32,7 +32,8 @@ export class DoctorAddFormComponent implements OnInit {
       specializations: this.choosenSpecializations,
     });
 
-    console.log(formRef.value);
+    this.doctorService.addDoctor(formRef.value);
+
     this.choosenSpecializations = [];
     this.specializationsCtrl.reset();
     this.specializationsCtrl.markAsPristine();

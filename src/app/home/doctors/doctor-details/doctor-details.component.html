@@ -12,14 +12,16 @@
             <label>Imię:</label>
             <input type="text" class="form-control" placeholder="Wprowadź imię" name="firstName" ngModel required
               #firstName="ngModel" [disabled]="!isEditMode">
-            <small class="help-message" *ngIf="!firstName.valid && firstName.touched">To pole jest wymagane</small>
+            <small class="help-message" *ngIf="!firstName.valid && firstName.touched && isEditMode">To pole jest
+              wymagane</small>
           </div>
 
           <div class="form-group mt-3 mb-2">
             <label>Nazwisko:</label>
             <input type="text" class="form-control" placeholder="Wprowadź nazwisko" name="lastName" ngModel required
               #lastName="ngModel" [disabled]="!isEditMode">
-            <small class="help-message" *ngIf="!lastName.valid && lastName.touched">To pole jest wymagane</small>
+            <small class="help-message" *ngIf="!lastName.valid && lastName.touched && isEditMode">To pole jest
+              wymagane</small>
           </div>
 
         </div>
@@ -32,11 +34,34 @@
 
           <div class=" form-group mt-3">
 
-            <mat-chip-list aria-label="Dog selection">
-              <mat-chip *ngFor="let spec of specializations">
-                {{spec.name}}
-              </mat-chip>
-            </mat-chip-list>
+            <mat-form-field class="example-chip-list" appearance="fill">
+
+              <mat-label>Specjalizacje</mat-label>
+
+              <mat-chip-list #chipList>
+
+                <mat-chip *ngFor="let choosenSpec of choosenSpecializations" (removed)="remove(choosenSpec)">
+                  {{choosenSpec}}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip>
+
+                <input [disabled]="!isEditMode" placeholder="Specjalizacje..." #specializationsInput
+                  [formControl]="specializationsCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+
+              </mat-chip-list>
+
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                  {{fruit}}
+                </mat-option>
+              </mat-autocomplete>
+
+            </mat-form-field>
+            <small class="help-message" *ngIf="!choosenSpecializations.length && isEditMode">To pole nie może być
+              puste</small>
 
           </div>
 
@@ -57,7 +82,8 @@
             <label>Kod pocztowy:</label>
             <input type="text" class="form-control" placeholder="Wprowadź kod pocztowy" name="postCode" ngModel required
               pattern="\d{2}-\d{3}" #postCode="ngModel" [disabled]="!isEditMode">
-            <small class="help-message" *ngIf="!postCode.valid && postCode.touched">Kod pocztowy powinien spełniać
+            <small class="help-message" *ngIf="!postCode.valid && postCode.touched && isEditMode">Kod pocztowy powinien
+              spełniać
               format
               "XX-XXX"</small>
           </div>
@@ -66,14 +92,15 @@
             <label>Miejscowość:</label>
             <input type="text" class="form-control" placeholder="Wprowadź miejscowość" name="city" ngModel required
               #city="ngModel" [disabled]="!isEditMode">
-            <small class="help-message" *ngIf="!city.valid && city.touched">To pole jest wymagane</small>
+            <small class="help-message" *ngIf="!city.valid && city.touched && isEditMode">To pole jest wymagane</small>
           </div>
 
           <div class="form-group mt-3">
             <label>Numer domu:</label>
             <input type="text" class="form-control" placeholder="Wprowadź numer domu" name="homeNumber" ngModel required
               #homeNumber="ngModel" [disabled]="!isEditMode">
-            <small class="help-message" *ngIf="!homeNumber.valid && homeNumber.touched">To pole jest wymagane</small>
+            <small class="help-message" *ngIf="!homeNumber.valid && homeNumber.touched && isEditMode">To pole jest
+              wymagane</small>
           </div>
 
           <div class="form-group mt-4 mb-2">
@@ -81,7 +108,8 @@
               Włącz tryb edycji
             </button>
             |
-            <button class="btn btn-primary" type="submit" [disabled]="!formRef.valid || !isEditMode">
+            <button class="btn btn-primary" type="submit"
+              [disabled]="!formRef.valid || !isEditMode || !choosenSpecializations.length">
               Edytuj dane lekarza
             </button>
           </div>

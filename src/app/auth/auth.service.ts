@@ -26,13 +26,16 @@ export class AuthService {
         password: password,
       })
       .pipe(
-        tap((responseData) => {
-          this.handleAuthentication(
-            username,
-            responseData.jwt,
-            responseData.userId
-          );
-        })
+        tap(
+          (responseData) => {
+            this.handleAuthentication(
+              username,
+              responseData.jwt,
+              responseData.userId
+            );
+          },
+          (err) => console.log(err)
+        )
       );
   }
 

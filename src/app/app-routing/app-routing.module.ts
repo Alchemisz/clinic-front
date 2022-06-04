@@ -19,6 +19,7 @@ import { DoctorDetailsComponent } from '../home/doctors/doctor-details/doctor-de
 import { PatientVisitsComponent } from '../home/visits/patient-visits/patient-visits.component';
 import { AccountInfoFormComponent } from '../home/account/account-info-form/account-info-form.component';
 import { ChangePasswordFormComponent } from '../home/account/change-password-form/change-password-form.component';
+import { HelpComponent } from '../home/help/help.component';
 
 const appRoutes: Routes = [
   {
@@ -64,6 +65,7 @@ const appRoutes: Routes = [
           { path: 'zmien-haslo', component: ChangePasswordFormComponent },
         ],
       },
+      { path: 'pomoc', component: HelpComponent },
     ],
     canActivate: [AuthGuard],
   },

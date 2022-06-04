@@ -52,6 +52,7 @@ import { PatientVisitsHeaderListItemComponent } from './home/patients/patients-l
 import { DoctorsHeaderListItemComponent } from './home/doctors/doctors-list/doctors-header-list-item/doctors-header-list-item.component';
 import { VisitUpcomingListItemComponent } from './home/visits/visit-upcoming-list-item/visit-upcoming-list-item.component';
 import { ChangePasswordFormComponent } from './home/account/change-password-form/change-password-form.component';
+import { HelpComponent } from './home/help/help.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { ChangePasswordFormComponent } from './home/account/change-password-form
     DoctorsHeaderListItemComponent,
     VisitUpcomingListItemComponent,
     ChangePasswordFormComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,

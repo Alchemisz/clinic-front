@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Subject } from 'rxjs';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 import { Visit } from './visit-nav-menu/visit.model';
 
 interface CreateVisitCommand {
@@ -17,15 +18,17 @@ export class VisitsService {
   visitsChanged = new Subject<boolean>();
   totalPages = new Subject<number>();
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private snackBarService: SnackBarService
+  ) {}
 
   addVisit(createVisitCommand: CreateVisitCommand) {
-    console.log('WYSYŁAM: ');
-    console.log(createVisitCommand);
-
     this.http
       .post('http://localhost:8080/visit/add', createVisitCommand)
-      .subscribe((response) => {});
+      .subscribe((response) => {
+        this.snackBarService.openSnackBar('Dodano wizytę!', 'Zamknij');
+      });
   }
 
   getUpcomingVisits(pageIndex: number) {
@@ -51,6 +54,10 @@ export class VisitsService {
     this.http
       .delete('http://localhost:8080/visit/' + visitId)
       .subscribe((response) => {
+        this.snackBarService.openSnackBar(
+          'Wizyta została usunięta!',
+          'Zamknij'
+        );
         this.visitsChanged.next(true);
       });
   }
@@ -59,6 +66,10 @@ export class VisitsService {
     this.http
       .patch('http://localhost:8080/visit/end/' + visitId, null)
       .subscribe((response) => {
+        this.snackBarService.openSnackBar(
+          'Wizyta została anulowana!',
+          'Zamknij'
+        );
         this.visitsChanged.next(true);
       });
   }

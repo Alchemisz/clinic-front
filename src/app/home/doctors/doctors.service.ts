@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, Subject } from 'rxjs';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 import { Doctor } from './model/doctor.model';
 
 @Injectable({
@@ -18,7 +19,10 @@ export class DoctorsService {
     }[]
   >();
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private snakBarService: SnackBarService
+  ) {}
 
   public getSpecializations() {
     this.http
@@ -33,6 +37,25 @@ export class DoctorsService {
       });
   }
 
+  public addDoctor(createDoctorCommand: any) {
+    console.log(createDoctorCommand);
+    this.http
+      .post('http://localhost:8080/doctor', createDoctorCommand)
+      .subscribe((response) => {
+        this.snakBarService.openSnackBar('Lekarz został dodany!', 'Zamknij');
+      });
+  }
+
+  public updateDoctor(updateDoctorCommand: any, id: number) {
+    console.log(updateDoctorCommand);
+    this.http
+      .patch('http://localhost:8080/doctor/' + id, updateDoctorCommand)
+      .subscribe((response) => {
+        this.snakBarService.openSnackBar('Lekarz został edytowany!', 'Zamknij');
+        this.getDoctorById(id);
+      });
+  }
+
   public getDoctorDTOs() {
     this.http.get<any>('http://localhost:8080/doctor/all').subscribe((data) => {
       this.doctors.next(data as Doctor[]);
@@ -43,6 +66,10 @@ export class DoctorsService {
     this.http
       .delete<any>('http://localhost:8080/doctor/' + id)
       .subscribe((data) => {
+        this.snakBarService.openSnackBar(
+          'Lekarz został poprawnie usunięty!',
+          'Zamknij'
+        );
         this.doctorsChanged.next(true);
       });
   }

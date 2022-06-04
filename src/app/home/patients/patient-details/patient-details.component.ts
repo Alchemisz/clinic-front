@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 import { Patient } from '../patient.model';
 import { PatientsService } from '../patients.service';
 
@@ -31,8 +32,7 @@ export class PatientDetailsComponent
 
   constructor(
     private patientsSerivce: PatientsService,
-    private route: ActivatedRoute,
-    private _snackBar: MatSnackBar
+    private route: ActivatedRoute
   ) {}
 
   ngAfterViewInit(): void {
@@ -40,14 +40,6 @@ export class PatientDetailsComponent
       this.patient = patient;
 
       this.fillPatientForm(patient);
-    });
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 2000,
     });
   }
 
@@ -63,9 +55,8 @@ export class PatientDetailsComponent
 
   onFormSubmit(formRef: NgForm) {
     this.isEditMode = false;
-    this.openSnackBar('Dane pacjenta zostały edytowane!', 'Zamknij');
-    //TU DODAĆ EDYCJE DANYCH PACJENTA
     console.log(formRef.control.value);
+    this.patientsSerivce.updatePatient(formRef.control.value);
   }
 
   ngOnDestroy(): void {
@@ -78,7 +69,6 @@ export class PatientDetailsComponent
       pesel: patient.pesel,
       firstName: patient.firstName,
       lastName: patient.lastName,
-      username: 'TU RZEBA DODAĆ',
       postCode: patient.address.postCode,
       city: patient.address.city,
       homeNumber: patient.address.houseNumber,

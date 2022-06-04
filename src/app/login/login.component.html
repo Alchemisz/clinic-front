@@ -7,15 +7,15 @@
       <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
         <label class="h4">Zaloguj się</label>
         <input type="text" id="login" class="fadeIn second" name="login" ngModel #login="ngModel"
-          placeholder="Nazwa użytkownika">
+          placeholder="Nazwa użytkownika" required>
         <input type="password" id="password" class="fadeIn third" name="password" ngModel #password="ngModel"
-          placeholder="Hasło">
+          placeholder="Hasło" required>
         <input type="submit" class="fadeIn fourth mt-3" value="Zaloguj">
       </form>
 
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover" href="#">Zapomniałeś hasłą?</a>
+        Wszystkie prawa zastrzeżone &copy;
       </div>
 
     </div>
