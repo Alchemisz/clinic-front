@@ -119,9 +119,4 @@ export class PatientsService {
         this.patientsChanged.next(true);
       });
   }
-
-  public generatePassword(): string {
-    console.log('No implementation GENERATE_PASSWORD (patient_service)');
-    return '';
-  }
 }

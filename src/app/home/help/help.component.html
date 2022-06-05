@@ -7,23 +7,22 @@
       <div class="card-body">
         <h5 class="card-title">Potrzebujesz pomocy? Zauważyłeś błąd?</h5>
         <h5 class="card-title">Napisz do nas:</h5>
+        <form #formRef="ngForm" (ngSubmit)="onFormSubmit(formRef)">
+          <div class=" form-group mt-3">
+            <label>Twój adres email:</label>
+            <input type="email" class="form-control" placeholder="Adres email" ngModel required>
+          </div>
 
-        <div class=" form-group mt-3">
-          <label>Twój adres email:</label>
-          <input #username type="email" class="form-control" placeholder="Adres email">
-        </div>
+          <div class=" form-group mt-3">
+            <label>Treść wiadomości:</label>
+            <textarea placeholder="Tutaj opisz swój problem" [value]="" class="form-control" rows="5" ngModel required>
+            </textarea>
+          </div>
 
-        <div class=" form-group mt-3">
-          <label>Treść wiadomości:</label>
-          <textarea placeholder="Tutaj opisz swój problem" class="form-control" rows="5">
-          </textarea>
-        </div>
-
-        <div class="form-group mt-3 mb-2">
-          <button class="btn btn-success" routerLink="./zmien-haslo">
-            Wyślij wiadomość
-          </button>
-        </div>
+          <div class="form-group mt-3 mb-2">
+            <button type="submbit" class="btn btn-success">Wyślij wiadomość</button>
+          </div>
+        </form>
 
       </div>
 
